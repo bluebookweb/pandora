@@ -1,0 +1,190 @@
+i.fa-dot-circle:before {
+    color: green!important;
+}
+.navbar .sidenav-toggler-inner {
+    margin-left: 10px;
+}
+form.logout-btn button {
+    width: 20px;
+    height: 20px;
+    color: #344767;
+    border: none;
+    /*background-image: url("../img/logout.jpg");*/
+    background-position: center center;
+    background-size: cover;
+    background-color: transparent;
+}
+.tab-pane p.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+}
+.avatar {
+    width: 150px!important;
+    height: 73px!important;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.avatar:hover {
+    transform: scale(1.05);
+}
+.form-action-block {
+    display: flex;
+    align-items: center;
+    padding: 31px!important;
+    justify-content: center;
+    margin-top: 18px;
+}
+.form-action-block a {
+    margin: 0 20px;
+}
+.form-action-block a i {
+    font-size: 15px;
+}
+.form-action-block a:hover i,
+.form-action-block form button:hover i {
+    transition: .3s all ease;
+    color: #cb0c9f;
+}
+.form-action-block form button {
+    font-size: 15px;
+    background-color: transparent;
+    border: none;
+    color: #8392ab;
+}
+#cke_editor, .cke_inner {
+    border-radius: 20px!important;
+}
+#cke_editor .cke_top {
+    background-color: #fff!important;
+    border-top-left-radius: 20px!important;
+    border-top-right-radius: 20px!important;
+}
+#cke_editor .cke_bottom {
+    background-color: #fff!important;
+    border-bottom-left-radius: 20px!important;
+    border-bottom-right-radius: 20px!important;
+}
+span.edit-title {
+    color: #cb0c9f;
+}
+.img-container {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: flex-start;
+}
+img.admin-img-banner {
+    border-radius: 20px;
+    margin-right: 10px;
+    max-width: 200px;
+    margin-bottom: 10px;
+}
+.slider-home {
+    margin: auto;
+}
+.slider-home img {
+    border-radius: 10px;
+}
+.admin-home-socials a i {
+    font-size: 20px;
+    margin: 0 10px;
+}
+.delete-btn-admin {
+    background-color: transparent;
+    border: none;
+    margin-left: 20px;
+}
+.delete-btn-admin i {
+    color: #344767;
+}
+.delete-btn-admin:hover i {
+    color: red;
+}
+.show-product-datatable {
+    margin-right: 20px;
+}
+#dataTableBuilder tbody tr td {
+    font-size: 12px;
+}
+#dataTableBuilder tbody tr td  {
+    padding-top: 15px;
+}
+.serv-desc-field {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    height: 100px;
+    padding: 10px;
+}
+#dataTableBuilder {
+    width: 100% !important;
+}
+
+button.logout_btn {
+    border: none;
+    background-color: transparent;
+}
+table td.sorting_1 svg {
+    width: 60px!important;
+}
+p.categories-bg {
+    height: 75px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.admin-pagination {
+    margin: 40px 0;
+}
+.admin-pagination div:last-child {
+    display: flex;
+    justify-content: center;
+}
+.admin-pagination div:first-child {
+    display: none;
+}
+.admin-pagination svg {
+    width: 20px!important;
+}
+.error-msg {
+    background-image: linear-gradient(310deg,#7928ca,#ff0080);
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.empty-products {
+    text-align: center;
+    padding: 50px 0;
+}
+.error-block {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-image: linear-gradient(310deg,#7928ca,#ff0080);
+    color: #fff;
+    font-weight: bold;
+    padding: 50px 30px;
+    border-radius: 10px;
+    animation: 8s hideBlock linear forwards;
+    transition: .3s all ease;
+}
+@keyframes hideBlock {
+    0% {
+        right: 20px;
+    }
+    50% {
+        right: 20px;
+    }
+    100% {
+        right: -100%;
+    }
+}
