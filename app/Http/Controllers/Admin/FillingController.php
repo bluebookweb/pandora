@@ -24,7 +24,7 @@ class FillingController extends Controller
      */
     public function index()
     {
-        $products = $this->fillings->getProducts(5);
+        $products = $this->fillings->getProducts(5, true);
         return view('admin.fillings.index',compact('products'));
     }
 

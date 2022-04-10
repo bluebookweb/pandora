@@ -22,11 +22,11 @@ class InventoryCategoryService {
             $data['snap_to_category'] = implode('::=::', $data['snap_to_category']);
         }
 
-        $data['snap_floor'] = $this->inventoryCategories->checkStatus($data, 'snap_floor');
-        $data['top_view'] = $this->inventoryCategories->checkStatus($data, 'top_view');
+        $data['snap_floor'] = $this->checkStatus($data, 'snap_floor');
+        $data['top_view'] = $this->checkStatus($data, 'top_view');
 
         try {
-            $data['thumb'] = $this->inventoryCategories->saveImg($request, 'thumb');
+            $data['thumb'] = $this->saveImg($request, 'thumb');
         } catch (\Exception $e) {
             return back()->withError('File not found!');
         }
@@ -43,13 +43,13 @@ class InventoryCategoryService {
             $data['snap_to_category'] = '';
         }
 
-        $data['snap_floor'] = $this->inventoryCategories->checkStatus($data, 'snap_floor');
-        $data['top_view'] = $this->inventoryCategories->checkStatus($data, 'top_view');
+        $data['snap_floor'] = $this->checkStatus($data, 'snap_floor');
+        $data['top_view'] = $this->checkStatus($data, 'top_view');
 
         if ($request->hasFile('thumb')) {
             try {
                 Storage::delete($inventoryCategory->thumb);
-                $data['thumb'] = $this->inventoryCategories->saveImg($request, 'thumb');
+                $data['thumb'] = $this->saveImg($request, 'thumb');
             } catch (\Exception $e) {
                 return back()->withError('File not found!');
             }
@@ -67,6 +67,21 @@ class InventoryCategoryService {
         }
 
         return $inventoryCategory->delete();
+    }
+
+    private function saveImg($request, $fileName) {
+        if ($request->hasFile($fileName)) {
+            $ext = $request->file($fileName)->extension();
+            return $request->file($fileName)->storeAs($fileName, time().'.'.$ext);
+        }
+    }
+
+    private function checkStatus($data, $field) {
+        if (isset($data[$field])) {
+            return $data[$field] = true;
+        } else {
+            return $data[$field] = false;
+        }
     }
 
 }

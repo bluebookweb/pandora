@@ -22,7 +22,7 @@ class DoorDivisionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $products = $this->divisionRepository->getProducts(5);
+        $products = $this->divisionRepository->getProducts(5, true);
         return view('admin.doordivisions.index', compact('products'));
     }
 

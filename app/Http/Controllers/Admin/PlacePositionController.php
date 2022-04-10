@@ -23,7 +23,7 @@ class PlacePositionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $products = $this->placePositions->getProducts();
+        $products = $this->placePositions->getProducts(5, true);
         return view('admin.positions.index', compact('products'));
     }
 

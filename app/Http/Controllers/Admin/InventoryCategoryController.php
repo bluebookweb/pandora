@@ -24,7 +24,7 @@ class InventoryCategoryController extends Controller
      */
     public function index()
     {
-        $products = $this->inventoryCategories->getProducts(5);
+        $products = $this->inventoryCategories->getProducts(5, true);
         return view('admin.inventoryCategories.index', compact('products'));
     }
 

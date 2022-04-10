@@ -22,9 +22,9 @@ class InventoryService {
         }
 
         try {
-            $data['thumb'] = $this->inventory->saveImg($request, 'thumb');
-            $data['front'] = $this->inventory->saveImg($request, 'front');
-            $data['top'] = $this->inventory->saveImg($request, 'top');
+            $data['thumb'] = $this->saveImg($request, 'thumb');
+            $data['front'] = $this->saveImg($request, 'front');
+            $data['top'] = $this->saveImg($request, 'top');
         } catch (\Exception $e) {
             return back()->withError('File not found!');
         }
@@ -41,15 +41,15 @@ class InventoryService {
         }
         if ($request->hasFile('thumb')) {
             Storage::delete($inventory->thumb);
-            $data['thumb'] = $this->inventory->saveImg($request, 'thumb');
+            $data['thumb'] = $this->saveImg($request, 'thumb');
         }
         if ($request->hasFile('front')) {
             Storage::delete($inventory->front);
-            $data['front'] = $this->inventory->saveImg($request, 'front');
+            $data['front'] = $this->saveImg($request, 'front');
         }
         if ($request->hasFile('top')) {
             Storage::delete($inventory->top);
-            $data['top'] = $this->inventory->saveImg($request, 'top');
+            $data['top'] = $this->saveImg($request, 'top');
         }
 
         return $inventory->update($data);
@@ -65,6 +65,13 @@ class InventoryService {
             return back()->withError('File not found!');
         }
         return $inventory->delete();
+    }
+
+    private function saveImg($request, $fileName) {
+        if ($request->hasFile($fileName)) {
+            $ext = $request->file($fileName)->extension();
+            return $request->file($fileName)->storeAs($fileName, time().'.'.$ext);
+        }
     }
 
 }

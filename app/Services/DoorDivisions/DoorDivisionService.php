@@ -17,7 +17,7 @@ class DoorDivisionService {
     public function create($request) {
         $data = $request->all();
         try {
-            $data['image'] = $this->divisionRepository->saveImg($request, 'image');
+            $data['image'] = $this->saveImg($request, 'image');
         } catch (\Exception $e) {
             return redirect()->route('door-division.index')
                 ->with('msg', 'File was not founded!');
@@ -31,7 +31,7 @@ class DoorDivisionService {
         if ($request->hasFile('image')) {
             Storage::delete($doorDivision->image);
             try {
-                $data['image'] = $this->divisionRepository->saveImg($request, 'image');
+                $data['image'] = $this->saveImg($request, 'image');
             } catch (\Exception $e) {
                 return redirect()->route('door-division.index')
                     ->with('msg', 'File was not founded!');
@@ -43,5 +43,12 @@ class DoorDivisionService {
     public function delete($doorDivision) {
         Storage::delete($doorDivision->image);
         return $doorDivision->delete();
+    }
+
+    private function saveImg($request, $fileName) {
+        if ($request->hasFile($fileName)) {
+            $ext = $request->file($fileName)->extension();
+            return $request->file($fileName)->storeAs($fileName, time().'.'.$ext);
+        }
     }
 }

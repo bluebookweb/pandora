@@ -10,23 +10,13 @@ class InventoryCategoryRepository {
         return InventoryCategoryModel::find($id);
     }
 
-    public function getProducts($itemsPaginate = false) {
-        return InventoryCategoryModel::paginate($itemsPaginate);
-    }
+    public function getProducts(int $paginateItems = 5, bool $paginate = true) {
+        $products = new InventoryCategoryModel();
 
-    public function saveImg($request, $fileName) {
-        if ($request->hasFile($fileName)) {
-            $ext = $request->file($fileName)->extension();
-            return $request->file($fileName)->storeAs($fileName, time().'.'.$ext);
-        }
-    }
-
-    public function checkStatus($data, $field) {
-        if (isset($data[$field])) {
-            return $data[$field] = true;
+        if ($paginate === true) {
+            return $products->paginate($paginateItems);
         } else {
-            return $data[$field] = false;
+            return $products->get();
         }
     }
-
 }

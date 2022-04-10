@@ -10,14 +10,13 @@ class InventoryRepository {
         return InventoryModel::find($id);
     }
 
-    public function getProducts($itemsPaginate = false) {
-        return InventoryModel::paginate($itemsPaginate);
-    }
+    public function getProducts(int $paginateItems = 5, bool $paginate = true) {
+        $products = new InventoryModel();
 
-    public function saveImg($request, $fileName) {
-        if ($request->hasFile($fileName)) {
-            $ext = $request->file($fileName)->extension();
-            return $request->file($fileName)->storeAs($fileName, time().'.'.$ext);
+        if ($paginate === true) {
+            return $products->paginate($paginateItems);
+        } else {
+            return $products->get();
         }
     }
 }

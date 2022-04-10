@@ -19,10 +19,10 @@ class PlacePositionService {
         Artisan::call('storage:link', []);
         $data = $request->all();
 
-        $data['has_gable'] = $this->placePositions->checkStatus($data, 'has_gable');
-        $data['has_impact'] = $this->placePositions->checkStatus($data, 'has_impact');
+        $data['has_gable'] = $this->checkStatus($data, 'has_gable');
+        $data['has_impact'] = $this->checkStatus($data, 'has_impact');
         try {
-            $data['image'] = $this->placePositions->saveImg($request, 'image');
+            $data['image'] = $this->saveImg($request, 'image');
         } catch (\Exception $e) {
             return back()->withError('File not found!');
         }
@@ -32,12 +32,12 @@ class PlacePositionService {
 
     public function edit($request, $position) {
         $data = $request->all();
-        $data['has_gable'] = $this->placePositions->checkStatus($data, 'has_gable');
-        $data['has_impact'] = $this->placePositions->checkStatus($data, 'has_impact');
+        $data['has_gable'] = $this->checkStatus($data, 'has_gable');
+        $data['has_impact'] = $this->checkStatus($data, 'has_impact');
         if ($request->hasFile('image')) {
             Storage::delete($position->image);
             try {
-                $data['image'] = $this->placePositions->saveImg($request, 'image');
+                $data['image'] = $this->saveImg($request, 'image');
             } catch (\Exception $e) {
                 return back()->withError('File not found!');
             }
@@ -56,5 +56,20 @@ class PlacePositionService {
         }
 
         return $position->delete();
+    }
+
+    private function saveImg($request, $fileName) {
+        if ($request->hasFile($fileName)) {
+            $ext = $request->file($fileName)->extension();
+            return $request->file($fileName)->storeAs($fileName, time().'.'.$ext);
+        }
+    }
+
+    private function checkStatus($data, $field) {
+        if (isset($data[$field])) {
+            return $data[$field] = true;
+        } else {
+            return $data[$field] = false;
+        }
     }
 }

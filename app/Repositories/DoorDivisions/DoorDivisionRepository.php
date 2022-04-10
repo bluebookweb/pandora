@@ -10,14 +10,13 @@ class DoorDivisionRepository {
         return DoorDivisionModel::find($id);
     }
 
-    public function getProducts($paginateItems = false) {
-        return DoorDivisionModel::paginate($paginateItems);
-    }
+    public function getProducts(int $paginateItems = 5, bool $paginate = true) {
+        $products = new DoorDivisionModel();
 
-    public function saveImg($request, $fileName) {
-        if ($request->hasFile($fileName)) {
-            $ext = $request->file($fileName)->extension();
-            return $request->file($fileName)->storeAs($fileName, time().'.'.$ext);
+        if ($paginate === true) {
+            return $products->paginate($paginateItems);
+        } else {
+            return $products->get();
         }
     }
 }
